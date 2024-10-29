@@ -1,0 +1,15 @@
+pwd         Print Work Directory
+ls -la      Affiche le contenu d'un répertoire
+cd          Change Directory
+rm          Remove / suppression de fichier
+rm -rf      Remove Recursive Force / suppression de repertoire
+mkdir       Make Diretory / Création d'un repertoire
+touch       Creation d'un fichier
+vim         Editeur de fichier
+-> i        Pour entrer en mode Insertion (ou shift+A)
+-> echap    Pour quitter le mode Insertion 
+-> :        Pour basculer en mode Commande
+-> :wq      W = Write; Q = Quit ; Enregistre et quitte l'editeur
+
+sudo        pour executer un commande an tant qu'Admin (Super User)
+clear       Vide le terminal

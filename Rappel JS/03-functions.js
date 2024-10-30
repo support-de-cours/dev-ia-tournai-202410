@@ -43,7 +43,7 @@ function Personne(nom, age) {
     this.age = age;
 }
 const personne = new Personne("Alice", 30);
-
+personne.nom
 
 // Methodes
 const objet = {

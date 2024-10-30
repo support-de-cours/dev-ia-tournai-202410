@@ -20,12 +20,12 @@ const fruits = ['Apples', 'Bananas', 'Kiwis'];
 // fruits.forEach( function(fruit) { console.log(fruit); } );
 // fruits.forEach( fruit => console.log(fruit) );
 
-// for (const fruit of fruits) {
-//     console.log(fruit);
-// }
-// for (const fruit in fruits) {
-//     console.log(fruit);
-// }
+for (const fruit of fruits) {
+    console.log(fruit);
+}
+for (const fruit in fruits) {
+    console.log(fruit);
+}
 
 // console.log(fruits);
 
@@ -38,14 +38,14 @@ const personne = {
     estEtudiant: false
 };
 
-// for (const element in personne) {
+for (const element in personne) {
 
-//     console.log( personne[element] );
+    console.log( personne[element] );
     
-// }
+}
 
-// console.log(personne.prenom);
-// console.log(personne['prenom']);
+console.log(personne.prenom);
+console.log(personne['prenom']);
 
 
 

@@ -10,6 +10,18 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous">
+    
+    <style>
+        label.required::after {
+            content: '*';
+            color: red;
+            padding-left: 4px;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+    <script src="./app.js" defer></script>
 
 </head>
 <body>
@@ -20,33 +32,33 @@
 
                 <h1>Register your new account</h1>
 
-                <form method="post">
+                <form rel="js-myForm" action="treatment.php" method="post" novalidate>
 
                     <!-- Firstname -->
                     <div class="mb-3">
-                        <label for="firstname">Your firstname:</label>
-                        <input type="text" id="firstname" name="firstname" class="form-control" required>
+                        <label for="firstname">Your firstname</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" required value="bobby">
                     </div>
 
                     <!-- Lastname -->
                     <div class="mb-3">
-                        <label for="lastname">Your lastname:</label>
+                        <label for="lastname">Your lastname</label>
                         <input type="text" id="lastname" name="lastname" class="form-control" required>
                     </div>
 
                     <!-- Email -->
                     <div class="mb-3">
-                        <label for="email">Your email address:</label>
+                        <label for="email">Your email address</label>
                         <input type="email" id="email" name="email" class="form-control" required>
                     </div>
 
                     <!-- Password -->
                     <div class="mb-3">
-                        <label for="password">Your new password:</label>
+                        <label for="password">Your new password</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Register my new account</button> or <a href="#">login</a>
+                    <button type="submit" class="btn btn-primary">Register my new account</button> or <a href="#myForm">login</a>
                 </form>
 
             </div>

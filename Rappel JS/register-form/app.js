@@ -23,6 +23,8 @@ form.addEventListener('submit', event => {
 
     event.preventDefault();
 
+
+
     // Retrieve Controls
     // --
 
@@ -43,6 +45,14 @@ form.addEventListener('submit', event => {
     // Email 
 
     // Password
+
+
+
+
+    // Reset Errors
+    // --
+
+
 
 
     // Check Controls

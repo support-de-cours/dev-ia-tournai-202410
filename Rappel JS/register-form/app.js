@@ -24,68 +24,160 @@ form.addEventListener('submit', event => {
     event.preventDefault();
 
 
-
     // Retrieve Controls
     // --
-
-    // const nodeFirstname = document.querySelector('#firstname');
-    // const nodeFirstname = document.querySelector('[name=firstname]');
-    // const nodeFirstname = form.querySelector('[name=firstname]');
-    // const nodeFirstname = event.target.querySelector('[name=firstname]');
-    // const nodeFirstname = event.target.firstname;
-
-    // Firstname
-    const nodeFirstname = form.firstname;
-    const firstname     = nodeFirstname.value;
-
-    // Lastname
-    const nodeLastname  = form.lastname;
-    const lastname      = nodeLastname.value;
-
-    // Email 
-
-    // Password
-
-
+    
+    const firstname = form.firstname;
+    const lastname  = form.lastname;
+    const email     = form.email;
+    const password  = form.password;
 
 
     // Reset Errors
     // --
 
-
-
+    controls.forEach( control => resetError(control) );
 
     // Check Controls
     // --
 
-    // Firstname is required
-    if (nodeFirstname.required && firstname.length <= 0) {
-        nodeFirstname.style.borderColor = "red";
+    // Firstname
+    checkControl(firstname, {
+        required: {
+            isRequired: firstname.required,
+            message: "Firstname is required"
+        },
+        notMatch: {
+            pattern: /^[a-z]+$/i,
+            message: "Firstname must have alphabetical chars only"
+        }
+    });
 
-        const nodeError = document.createElement('div');
-        nodeError.classList.add('error-message');
-        nodeError.textContent = "Firstname is required";
+    // Lastname 
+    checkControl(lastname, {
+        required: {
+            isRequired: lastname.required,
+            message: "Lastname is required"
+        },
+        notMatch: {
+            pattern: /^[a-z]+$/i,
+            message: "Lastname must have alphabetical chars only"
+        }
+    });
 
-        const parent = nodeFirstname.parentNode;
-        parent.append(nodeError);
-    }
+    // Email
 
-    // Firstname must be a string (only a-z and dash)
+    checkControl(email, {
+        required: {
+            isRequired: email.required,
+            message: "Email is required"
+        },
+        notMatch: {
+            pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
+            message: "The email address must be in the format 'example@domain.com'."
+        }
+    });
 
-    // Lastname is required
-    
-    // Lastname must be a string (only a-z and dash)
-
-    // Email is required
-
-    // Email syntax must be user@server.com
 
     // Password is required
-
-    // Password must contain at least one lowercase character.
-    // Password must contain at least one upper character.
-    // Password must contain at least one number.
-    // Password must contain at least one special char.
-    // Password must contain 6 characters min.
+    checkControl(password, {
+        required: {
+            isRequired: password.required,
+            message: "Password is required"
+        },
+        minLength: {
+            length: 6,
+            message: "Password must contain at least 6 characters."
+        },
+        lowercase: {
+            regex: /[a-z]/,
+            message: "Password must contain at least one lowercase character."
+        },
+        uppercase: {
+            regex: /[A-Z]/,
+            message: "Password must contain at least one uppercase character."
+        },
+        digit: {
+            regex: /\d/,
+            message: "Password must contain at least one number."
+        },
+        specialChar: {
+            regex: /[!@#$%^&*(),.?":{}|<>]/,
+            message: "Password must contain at least one special character."
+        }
+    });
 
 });
+
+function checkControl(node, constraints)
+{
+    const value = node.value;
+    let hasError = false;
+    let message;
+
+
+    // Is required
+    if (constraints?.required?.isRequired && value.length <= 0) {
+        hasError = true;
+        message = constraints.required.message;
+    }
+
+    // Min Length
+    else if (constraints.minLength && value.length < constraints.minLength.length) 
+    {
+        hasError = true;
+        message = constraints.minLength.message;
+    }
+
+    // Lowercase
+    else if (constraints.lowercase && !constraints.lowercase.regex.test(value)) 
+    {
+        hasError = true;
+        message = constraints.lowercase.message;
+    }
+
+    // Uppercase
+    else if (constraints.uppercase && !constraints.uppercase.regex.test(value)) 
+    {
+        hasError = true;
+        message = constraints.uppercase.message;
+    }
+
+    // Digit
+    else if (constraints.digit && !constraints.digit.regex.test(value)) 
+    {
+        hasError = true;
+        message = constraints.digit.message;
+    }
+
+    // Special Character
+    else if (constraints.specialChar && !constraints.specialChar.regex.test(value)) 
+    {
+        hasError = true;
+        message = constraints.specialChar.message;
+    }
+
+    // Format / Syntax not match
+    else if (constraints.notMatch && !constraints.notMatch.pattern.test(value)) {
+        hasError = true;
+        message = constraints.notMatch.message;
+    }
+
+    if (hasError) {
+        node.classList.add('is-invalid');
+        // node.style.borderColor = "red";
+
+        const error = document.createElement('div');
+        error.classList.add('error-message');
+        error.textContent = message;
+
+        const parent = node.parentNode;
+        parent.append(error);
+    }
+}
+
+function resetError(node)
+{
+    node.classList.remove('is-invalid');
+    node.parentNode.querySelector('.error-message')?.remove();
+}

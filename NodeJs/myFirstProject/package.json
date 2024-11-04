@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "watch": "nodemon index.js"
-  },
-  "dependencies": {
-    "bootstrap": "^5.3.3"
-  }
-}
